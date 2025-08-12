@@ -1,11 +1,11 @@
 {
-  "startTime": "2025-08-12T17:09:06.312Z",
-  "endTime": "2025-08-12T17:09:06.314Z",
+  "startTime": "2025-08-12T17:37:22.061Z",
+  "endTime": "2025-08-12T17:37:22.062Z",
   "totalTests": 12,
   "passedTests": 12,
   "failedTests": 0,
   "skippedTests": 0,
-  "duration": 2,
+  "duration": 1,
   "specs": [
     {
       "name": "06-bug-validation.cy.js",

@@ -114,6 +114,7 @@ cypress/downloads/
 test-results/
 junit.xml
 mochawesome-report/
+cypress/reports/
 
 # Build outputs
 build/
