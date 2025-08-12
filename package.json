@@ -1,0 +1,39 @@
+{
+  "name": "kanban-e2e-tests",
+  "version": "1.0.0",
+  "description": "Testes end-to-end para o sistema Kanban usando Cypress",
+  "main": "index.js",
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "test": "cypress run",
+    "test:headed": "cypress run --headed",
+    "test:chrome": "cypress run --browser chrome",
+    "test:firefox": "cypress run --browser firefox",
+    "test:report": "cypress run && node scripts/generate-report.js",
+    "test:report:open": "cypress run && node scripts/generate-report.js && start cypress/reports/report.html",
+    "report:generate": "node scripts/generate-report.js",
+    "report:open": "start cypress/reports/report.html",
+    "test:basic": "cypress run --spec 'cypress/e2e/01-basic-functionality.cy.js'",
+    "test:tasks": "cypress run --spec 'cypress/e2e/02-add-task.cy.js,cypress/e2e/03-task-management.cy.js'",
+    "test:ui": "cypress run --spec 'cypress/e2e/04-ui-accessibility.cy.js'",
+    "test:errors": "cypress run --spec 'cypress/e2e/05-error-handling.cy.js'",
+    "test:bugs": "cypress run --spec 'cypress/e2e/06-bug-validation.cy.js'",
+    "test:security": "cypress run --spec 'cypress/e2e/06-bug-validation.cy.js' --env grepTags='@security'",
+    "test:regression": "cypress run --spec 'cypress/e2e/06-bug-validation.cy.js' --env grepTags='@regression'"
+  },
+  "keywords": [
+    "cypress",
+    "e2e",
+    "testing",
+    "kanban",
+    "automation"
+  ],
+  "author": "Desenvolvedor",
+  "license": "MIT",
+  "devDependencies": {
+    "cypress": "^13.6.0",
+    "@cypress/grep": "^4.0.1"
+  },
+  "dependencies": {}
+}

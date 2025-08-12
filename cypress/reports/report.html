@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Testes E2E - Kanban</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 10px; margin-bottom: 30px; }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .header p { font-size: 1.2em; opacity: 0.9; }
+        .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .summary-card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
+        .summary-card h3 { color: #333; margin-bottom: 10px; }
+        .summary-card .number { font-size: 2.5em; font-weight: bold; margin-bottom: 5px; }
+        .passed { color: #28a745; }
+        .failed { color: #dc3545; }
+        .skipped { color: #ffc107; }
+        .total { color: #007bff; }
+        .specs-section { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .spec-item { border-bottom: 1px solid #eee; padding: 20px 0; }
+        .spec-item:last-child { border-bottom: none; }
+        .spec-header { display: flex; justify-content: between; align-items: center; margin-bottom: 15px; }
+        .spec-name { font-size: 1.3em; font-weight: bold; color: #333; }
+        .spec-status { padding: 5px 15px; border-radius: 20px; color: white; font-weight: bold; }
+        .spec-status.passed { background: #28a745; }
+        .spec-status.failed { background: #dc3545; }
+        .test-list { margin-left: 20px; }
+        .test-item { padding: 8px 0; display: flex; align-items: center; }
+        .test-status { width: 20px; height: 20px; border-radius: 50%; margin-right: 10px; }
+        .test-status.passed { background: #28a745; }
+        .test-status.failed { background: #dc3545; }
+        .test-status.skipped { background: #ffc107; }
+        .test-title { flex: 1; }
+        .test-duration { color: #666; font-size: 0.9em; }
+        .error-details { background: #f8f9fa; border-left: 4px solid #dc3545; padding: 15px; margin-top: 10px; border-radius: 5px; }
+        .error-details pre { color: #dc3545; font-size: 0.9em; white-space: pre-wrap; }
+        .footer { text-align: center; margin-top: 30px; color: #666; }
+        .progress-bar { width: 100%; height: 20px; background: #e9ecef; border-radius: 10px; overflow: hidden; margin-top: 10px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #28a745, #20c997); transition: width 0.3s ease; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 Relatório de Testes E2E</h1>
+            <p>Sistema Kanban - Automação com Cypress</p>
+            <p>Executado em: 12/08/2025, 13:56:25</p>
+        </div>
+
+        <div class="summary">
+            <div class="summary-card">
+                <h3>Total de Testes</h3>
+                <div class="number total">12</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%"></div>
+                </div>
+            </div>
+            <div class="summary-card">
+                <h3>✅ Aprovados</h3>
+                <div class="number passed">0</div>
+                <p>0.0% do total</p>
+            </div>
+            <div class="summary-card">
+                <h3>❌ Falharam</h3>
+                <div class="number failed">12</div>
+                <p>100.0% do total</p>
+            </div>
+            <div class="summary-card">
+                <h3>⏭️ Ignorados</h3>
+                <div class="number skipped">0</div>
+                <p>Duração: 0s</p>
+            </div>
+        </div>
+
+        <div class="specs-section">
+            <h2>📋 Detalhes dos Testes por Arquivo</h2>
+            
+        <div class="spec-item">
+            <div class="spec-header">
+                <div class="spec-name">06-bug-validation.cy.js</div>
+                <div class="spec-status failed">FAILED</div>
+            </div>
+            <div class="test-list">
+                
+        <div class="test-item">
+            <div class="test-status failed"></div>
+            <div class="test-title">Validação de Bugs Reportados > Segurança (SEC) > SEC-001: Deve prevenir XSS em títulos de colunas</div>
+            <div class="test-duration">15312ms</div>
+            
+        <div class="error-details">
+            <strong>Erro:</strong>
+            <pre>TypeError: cy.get(...).should(...).or is not a function
+    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:29:9)</pre>
+        </div>
+        </div>
+        <div class="test-item">
+            <div class="test-status failed"></div>
+            <div class="test-title">Validação de Bugs Reportados > Usabilidade (USAB) > USAB-001: Deve exibir confirmação ao excluir coluna com tarefas</div>
+            <div class="test-duration">44120ms</div>
+            
+        <div class="error-details">
+            <strong>Erro:</strong>
+            <pre>AssertionError: Timed out retrying after 10000ms: Expected to find element: `[data-cy="add-column-btn"], button`, but never found it.
+    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:37:9)</pre>
+        </div>
+        </div>
+        <div class="test-item">
+            <div class="test-status failed"></div>
+            <div class="test-title">Validação de Bugs Reportados > Usabilidade (USAB) > USAB-002: Deve exibir confirmação ao excluir tarefas</div>
+            <div class="test-duration">45223ms</div>
+            
+        <div class="error-details">
+            <strong>Erro:</strong>
+            <pre>AssertionError: Timed out retrying after 10000ms: Expected to find element: `[data-cy="add-task-button"], button:contains("Adicionar Tarefa")`, but never found it.
+    at Context.eval (webpack://kanban-e2e-tests/./cypress/support/commands.js:14:5)</pre>
+        </div>
+        </div>
+        <div class="test-item">
+            <div class="test-status failed"></div>
+            <div class="test-title">Validação de Bugs Reportados > Usabilidade (USAB) > USAB-003: Deve fornecer feedback visual durante drag-and-drop</div>
+            <div class="test-duration">14632ms</div>
+            
+        <div class="error-details">
+            <strong>Erro:</strong>
+            <pre>TypeError: cy.get(...).should(...).or is not a function
+    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:81:9)</pre>
+        </div>
+        </div>
+        <div class="test-item">
+            <div class="test-status failed"></div>
+            <div class="test-title">Validação de Bugs Reportados > Bugs Funcionais e de Layout (BUG) > BUG-001: Deve truncar nomes longos de colunas</div>
+            <div class="test-duration">45059ms</div>
+            
+        <div class="error-details">
+            <strong>Erro:</strong>
+            <pre>AssertionError: Timed out retrying after 10000ms: Expected to find element: `[data-cy="add-column-btn"], button`, but never found it.
+    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:91:9)</pre>
+        </div>
+        </div>
+        <div class="test-item">
+            <div class="test-status failed"></div>
+            <div class="test-title">Validação de Bugs Reportados > Bugs Funcionais e de Layout (BUG) > BUG-002: Deve validar nomes de colunas com apenas espaços</div>
+            <div class="test-duration">15215ms</div>
+            
+        <div class="error-details">
+            <strong>Erro:</strong>
+            <pre>TypeError: cy.get(...).contains(...).should(...).or is not a function
+    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:121:9)</pre>
+        </div>
+        </div>
+        <div class="test-item">
+            <div class="test-status failed"></div>
+            <div class="test-title">Validação de Bugs Reportados > Bugs Funcionais e de Layout (BUG) > BUG-003: Deve prevenir tags duplicadas (case-insensitive)</div>
+            <div class="test-duration">45223ms</div>
+            
+        <div class="error-details">
+            <strong>Erro:</strong>
+            <pre>AssertionError: Timed out retrying after 10000ms: Expected to find element: `[data-cy="add-task-button"], button:contains("Adicionar Tarefa")`, but never found it.
+    at Context.eval (webpack://kanban-e2e-tests/./cypress/support/commands.js:14:5)</pre>
+        </div>
+        </div>
+        <div class="test-item">
+            <div class="test-status failed"></div>
+            <div class="test-title">Validação de Bugs Reportados > Bugs Funcionais e de Layout (BUG) > BUG-004: Deve gerenciar overflow de tags em cards</div>
+            <div class="test-duration">14683ms</div>
+            
+        <div class="error-details">
+            <strong>Erro:</strong>
+            <pre>TypeError: cy.get(...).first(...).should(...).or is not a function
+    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:167:9)</pre>
+        </div>
+        </div>
+        <div class="test-item">
+            <div class="test-status failed"></div>
+            <div class="test-title">Validação de Bugs Reportados > Bugs Funcionais e de Layout (BUG) > BUG-005: Deve aplicar cor de fundo completa em tags com múltiplas palavras</div>
+            <div class="test-duration">45251ms</div>
+            
+        <div class="error-details">
+            <strong>Erro:</strong>
+            <pre>AssertionError: Timed out retrying after 10000ms: Expected to find element: `[data-cy="add-task-button"], button:contains("Adicionar Tarefa")`, but never found it.
+    at Context.eval (webpack://kanban-e2e-tests/./cypress/support/commands.js:14:5)</pre>
+        </div>
+        </div>
+        <div class="test-item">
+            <div class="test-status failed"></div>
+            <div class="test-title">Validação de Bugs Reportados > Bugs Funcionais e de Layout (BUG) > BUG-006: Deve persistir preferência de tema após recarregar a página</div>
+            <div class="test-duration">15252ms</div>
+            
+        <div class="error-details">
+            <strong>Erro:</strong>
+            <pre>TypeError: cy.get(...).should(...).or is not a function
+    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:194:56)</pre>
+        </div>
+        </div>
+        <div class="test-item">
+            <div class="test-status failed"></div>
+            <div class="test-title">Validação de Bugs Reportados > Bugs Funcionais e de Layout (BUG) > BUG-007: Deve aplicar cor padrão visível para tags criadas sem cor</div>
+            <div class="test-duration">45407ms</div>
+            
+        <div class="error-details">
+            <strong>Erro:</strong>
+            <pre>AssertionError: Timed out retrying after 10000ms: Expected to find element: `[data-cy="add-task-button"], button:contains("Adicionar Tarefa")`, but never found it.
+    at Context.eval (webpack://kanban-e2e-tests/./cypress/support/commands.js:14:5)</pre>
+        </div>
+        </div>
+        <div class="test-item">
+            <div class="test-status failed"></div>
+            <div class="test-title">Validação de Bugs Reportados > Testes de Regressão > Deve executar todos os cenários de bug em sequência</div>
+            <div class="test-duration">44893ms</div>
+            
+        <div class="error-details">
+            <strong>Erro:</strong>
+            <pre>AssertionError: Timed out retrying after 10000ms: Expected to find element: `[data-cy="add-column-btn"], button`, but never found it.
+    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:253:9)</pre>
+        </div>
+        </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="footer">
+            <p>Relatório gerado automaticamente pelo Cypress Reporter</p>
+            <p>Cypress  | Node.js v22.17.1</p>
+        </div>
+    </div>
+</body>
+</html>
