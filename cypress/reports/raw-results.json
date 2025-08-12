@@ -58,7 +58,7 @@
     "modifyObstructiveCode": true,
     "numTestsKeptInMemory": 0,
     "platform": "win32",
-    "port": 52135,
+    "port": 57581,
     "projectId": null,
     "redirectionLimit": 20,
     "reporter": "spec",
@@ -113,7 +113,7 @@
     "cypressInternalEnv": "production"
   },
   "cypressVersion": "13.17.0",
-  "endedTestsAt": "2025-08-12T16:56:24.089Z",
+  "endedTestsAt": "2025-08-12T17:09:05.079Z",
   "osName": "win32",
   "osVersion": "10.0.26100",
   "runs": [
@@ -123,267 +123,14 @@
       "reporterStats": {
         "suites": 5,
         "tests": 12,
-        "passes": 0,
+        "passes": 12,
         "pending": 0,
-        "failures": 12,
-        "start": "2025-08-12T16:49:50.589Z",
-        "end": "2025-08-12T16:56:24.109Z",
-        "duration": 393520
+        "failures": 0,
+        "start": "2025-08-12T17:08:35.925Z",
+        "end": "2025-08-12T17:09:05.090Z",
+        "duration": 29165
       },
-      "screenshots": [
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Segurança (SEC) -- SEC-001 Deve prevenir XSS em títulos de colunas (failed).png",
-          "takenAt": "2025-08-12T16:49:56.577Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Segurança (SEC) -- SEC-001 Deve prevenir XSS em títulos de colunas (failed) (attempt 2).png",
-          "takenAt": "2025-08-12T16:50:01.274Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Segurança (SEC) -- SEC-001 Deve prevenir XSS em títulos de colunas (failed) (attempt 3).png",
-          "takenAt": "2025-08-12T16:50:05.901Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Usabilidade (USAB) -- USAB-001 Deve exibir confirmação ao excluir coluna com tarefas (failed).png",
-          "takenAt": "2025-08-12T16:50:20.493Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Usabilidade (USAB) -- USAB-001 Deve exibir confirmação ao excluir coluna com tarefas (failed) (attempt 2).png",
-          "takenAt": "2025-08-12T16:50:35.428Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Usabilidade (USAB) -- USAB-001 Deve exibir confirmação ao excluir coluna com tarefas (failed) (attempt 3).png",
-          "takenAt": "2025-08-12T16:50:50.044Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Usabilidade (USAB) -- USAB-002 Deve exibir confirmação ao excluir tarefas (failed).png",
-          "takenAt": "2025-08-12T16:51:05.070Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Usabilidade (USAB) -- USAB-002 Deve exibir confirmação ao excluir tarefas (failed) (attempt 2).png",
-          "takenAt": "2025-08-12T16:51:19.962Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Usabilidade (USAB) -- USAB-002 Deve exibir confirmação ao excluir tarefas (failed) (attempt 3).png",
-          "takenAt": "2025-08-12T16:51:35.386Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Usabilidade (USAB) -- USAB-003 Deve fornecer feedback visual durante drag-and-drop (failed).png",
-          "takenAt": "2025-08-12T16:51:40.364Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Usabilidade (USAB) -- USAB-003 Deve fornecer feedback visual durante drag-and-drop (failed) (attempt 2).png",
-          "takenAt": "2025-08-12T16:51:45.317Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Usabilidade (USAB) -- USAB-003 Deve fornecer feedback visual durante drag-and-drop (failed) (attempt 3).png",
-          "takenAt": "2025-08-12T16:51:50.266Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Bugs Funcionais e de Layout (BUG) -- BUG-001 Deve truncar nomes longos de colunas (failed).png",
-          "takenAt": "2025-08-12T16:52:05.200Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Bugs Funcionais e de Layout (BUG) -- BUG-001 Deve truncar nomes longos de colunas (failed) (attempt 2).png",
-          "takenAt": "2025-08-12T16:52:20.500Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Bugs Funcionais e de Layout (BUG) -- BUG-001 Deve truncar nomes longos de colunas (failed) (attempt 3).png",
-          "takenAt": "2025-08-12T16:52:35.503Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Bugs Funcionais e de Layout (BUG) -- BUG-002 Deve validar nomes de colunas com apenas espaços (failed).png",
-          "takenAt": "2025-08-12T16:52:40.908Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Bugs Funcionais e de Layout (BUG) -- BUG-002 Deve validar nomes de colunas com apenas espaços (failed) (attempt 2).png",
-          "takenAt": "2025-08-12T16:52:46.044Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Bugs Funcionais e de Layout (BUG) -- BUG-002 Deve validar nomes de colunas com apenas espaços (failed) (attempt 3).png",
-          "takenAt": "2025-08-12T16:52:51.090Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Bugs Funcionais e de Layout (BUG) -- BUG-003 Deve prevenir tags duplicadas (case-insensitive) (failed).png",
-          "takenAt": "2025-08-12T16:53:06.128Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Bugs Funcionais e de Layout (BUG) -- BUG-003 Deve prevenir tags duplicadas (case-insensitive) (failed) (attempt 2).png",
-          "takenAt": "2025-08-12T16:53:21.210Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Bugs Funcionais e de Layout (BUG) -- BUG-003 Deve prevenir tags duplicadas (case-insensitive) (failed) (attempt 3).png",
-          "takenAt": "2025-08-12T16:53:36.624Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Bugs Funcionais e de Layout (BUG) -- BUG-004 Deve gerenciar overflow de tags em cards (failed).png",
-          "takenAt": "2025-08-12T16:53:41.595Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Bugs Funcionais e de Layout (BUG) -- BUG-004 Deve gerenciar overflow de tags em cards (failed) (attempt 2).png",
-          "takenAt": "2025-08-12T16:53:46.539Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Bugs Funcionais e de Layout (BUG) -- BUG-004 Deve gerenciar overflow de tags em cards (failed) (attempt 3).png",
-          "takenAt": "2025-08-12T16:53:51.570Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Bugs Funcionais e de Layout (BUG) -- BUG-005 Deve aplicar cor de fundo completa em tags com múltiplas palavras (failed).png",
-          "takenAt": "2025-08-12T16:54:06.580Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Bugs Funcionais e de Layout (BUG) -- BUG-005 Deve aplicar cor de fundo completa em tags com múltiplas palavras (failed) (attempt 2).png",
-          "takenAt": "2025-08-12T16:54:21.972Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Bugs Funcionais e de Layout (BUG) -- BUG-005 Deve aplicar cor de fundo completa em tags com múltiplas palavras (failed) (attempt 3).png",
-          "takenAt": "2025-08-12T16:54:37.155Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Bugs Funcionais e de Layout (BUG) -- BUG-006 Deve persistir preferência de tema após recarregar a página (failed).png",
-          "takenAt": "2025-08-12T16:54:42.474Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Bugs Funcionais e de Layout (BUG) -- BUG-006 Deve persistir preferência de tema após recarregar a página (failed) (attempt 2).png",
-          "takenAt": "2025-08-12T16:54:47.640Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Bugs Funcionais e de Layout (BUG) -- BUG-006 Deve persistir preferência de tema após recarregar a página (failed) (attempt 3).png",
-          "takenAt": "2025-08-12T16:54:52.707Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Bugs Funcionais e de Layout (BUG) -- BUG-007 Deve aplicar cor padrão visível para tags criadas sem cor (failed).png",
-          "takenAt": "2025-08-12T16:55:07.853Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Bugs Funcionais e de Layout (BUG) -- BUG-007 Deve aplicar cor padrão visível para tags criadas sem cor (failed) (attempt 2).png",
-          "takenAt": "2025-08-12T16:55:23.010Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Bugs Funcionais e de Layout (BUG) -- BUG-007 Deve aplicar cor padrão visível para tags criadas sem cor (failed) (attempt 3).png",
-          "takenAt": "2025-08-12T16:55:38.503Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Testes de Regressão -- Deve executar todos os cenários de bug em sequência (failed).png",
-          "takenAt": "2025-08-12T16:55:53.715Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Testes de Regressão -- Deve executar todos os cenários de bug em sequência (failed) (attempt 2).png",
-          "takenAt": "2025-08-12T16:56:09.089Z",
-          "width": 1280
-        },
-        {
-          "height": 720,
-          "name": null,
-          "path": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\screenshots\\06-bug-validation.cy.js\\Validação de Bugs Reportados -- Testes de Regressão -- Deve executar todos os cenários de bug em sequência (failed) (attempt 3).png",
-          "takenAt": "2025-08-12T16:56:23.793Z",
-          "width": 1280
-        }
-      ],
+      "screenshots": [],
       "spec": {
         "absolute": "C:/Users/Edcleryton/Documents/desafio_tecnico/cypress/e2e/06-bug-validation.cy.js",
         "fileExtension": ".js",
@@ -392,13 +139,13 @@
         "relative": "cypress\\e2e\\06-bug-validation.cy.js"
       },
       "stats": {
-        "duration": 393510,
-        "endedAt": "2025-08-12T16:56:24.089Z",
-        "failures": 12,
-        "passes": 0,
+        "duration": 29160,
+        "endedAt": "2025-08-12T17:09:05.079Z",
+        "failures": 0,
+        "passes": 12,
         "pending": 0,
         "skipped": 0,
-        "startedAt": "2025-08-12T16:49:50.579Z",
+        "startedAt": "2025-08-12T17:08:35.919Z",
         "suites": 5,
         "tests": 12
       },
@@ -406,18 +153,12 @@
         {
           "attempts": [
             {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
+              "state": "passed"
             }
           ],
-          "displayError": "TypeError: cy.get(...).should(...).or is not a function\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:29:9)",
-          "duration": 15312,
-          "state": "failed",
+          "displayError": null,
+          "duration": 3580,
+          "state": "passed",
           "title": [
             "Validação de Bugs Reportados",
             "Segurança (SEC)",
@@ -427,18 +168,12 @@
         {
           "attempts": [
             {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
+              "state": "passed"
             }
           ],
-          "displayError": "AssertionError: Timed out retrying after 10000ms: Expected to find element: `[data-cy=\"add-column-btn\"], button`, but never found it.\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:37:9)",
-          "duration": 44120,
-          "state": "failed",
+          "displayError": null,
+          "duration": 2259,
+          "state": "passed",
           "title": [
             "Validação de Bugs Reportados",
             "Usabilidade (USAB)",
@@ -448,18 +183,12 @@
         {
           "attempts": [
             {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
+              "state": "passed"
             }
           ],
-          "displayError": "AssertionError: Timed out retrying after 10000ms: Expected to find element: `[data-cy=\"add-task-button\"], button:contains(\"Adicionar Tarefa\")`, but never found it.\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/support/commands.js:14:5)",
-          "duration": 45223,
-          "state": "failed",
+          "displayError": null,
+          "duration": 2252,
+          "state": "passed",
           "title": [
             "Validação de Bugs Reportados",
             "Usabilidade (USAB)",
@@ -469,18 +198,12 @@
         {
           "attempts": [
             {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
+              "state": "passed"
             }
           ],
-          "displayError": "TypeError: cy.get(...).should(...).or is not a function\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:81:9)",
-          "duration": 14632,
-          "state": "failed",
+          "displayError": null,
+          "duration": 2236,
+          "state": "passed",
           "title": [
             "Validação de Bugs Reportados",
             "Usabilidade (USAB)",
@@ -490,18 +213,12 @@
         {
           "attempts": [
             {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
+              "state": "passed"
             }
           ],
-          "displayError": "AssertionError: Timed out retrying after 10000ms: Expected to find element: `[data-cy=\"add-column-btn\"], button`, but never found it.\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:91:9)",
-          "duration": 45059,
-          "state": "failed",
+          "displayError": null,
+          "duration": 2230,
+          "state": "passed",
           "title": [
             "Validação de Bugs Reportados",
             "Bugs Funcionais e de Layout (BUG)",
@@ -511,18 +228,12 @@
         {
           "attempts": [
             {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
+              "state": "passed"
             }
           ],
-          "displayError": "TypeError: cy.get(...).contains(...).should(...).or is not a function\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:121:9)",
-          "duration": 15215,
-          "state": "failed",
+          "displayError": null,
+          "duration": 2218,
+          "state": "passed",
           "title": [
             "Validação de Bugs Reportados",
             "Bugs Funcionais e de Layout (BUG)",
@@ -532,18 +243,12 @@
         {
           "attempts": [
             {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
+              "state": "passed"
             }
           ],
-          "displayError": "AssertionError: Timed out retrying after 10000ms: Expected to find element: `[data-cy=\"add-task-button\"], button:contains(\"Adicionar Tarefa\")`, but never found it.\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/support/commands.js:14:5)",
-          "duration": 45223,
-          "state": "failed",
+          "displayError": null,
+          "duration": 2220,
+          "state": "passed",
           "title": [
             "Validação de Bugs Reportados",
             "Bugs Funcionais e de Layout (BUG)",
@@ -553,18 +258,12 @@
         {
           "attempts": [
             {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
+              "state": "passed"
             }
           ],
-          "displayError": "TypeError: cy.get(...).first(...).should(...).or is not a function\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:167:9)",
-          "duration": 14683,
-          "state": "failed",
+          "displayError": null,
+          "duration": 2288,
+          "state": "passed",
           "title": [
             "Validação de Bugs Reportados",
             "Bugs Funcionais e de Layout (BUG)",
@@ -574,18 +273,12 @@
         {
           "attempts": [
             {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
+              "state": "passed"
             }
           ],
-          "displayError": "AssertionError: Timed out retrying after 10000ms: Expected to find element: `[data-cy=\"add-task-button\"], button:contains(\"Adicionar Tarefa\")`, but never found it.\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/support/commands.js:14:5)",
-          "duration": 45251,
-          "state": "failed",
+          "displayError": null,
+          "duration": 2456,
+          "state": "passed",
           "title": [
             "Validação de Bugs Reportados",
             "Bugs Funcionais e de Layout (BUG)",
@@ -595,18 +288,12 @@
         {
           "attempts": [
             {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
+              "state": "passed"
             }
           ],
-          "displayError": "TypeError: cy.get(...).should(...).or is not a function\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:194:56)",
-          "duration": 15252,
-          "state": "failed",
+          "displayError": null,
+          "duration": 2453,
+          "state": "passed",
           "title": [
             "Validação de Bugs Reportados",
             "Bugs Funcionais e de Layout (BUG)",
@@ -616,18 +303,12 @@
         {
           "attempts": [
             {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
+              "state": "passed"
             }
           ],
-          "displayError": "AssertionError: Timed out retrying after 10000ms: Expected to find element: `[data-cy=\"add-task-button\"], button:contains(\"Adicionar Tarefa\")`, but never found it.\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/support/commands.js:14:5)",
-          "duration": 45407,
-          "state": "failed",
+          "displayError": null,
+          "duration": 2418,
+          "state": "passed",
           "title": [
             "Validação de Bugs Reportados",
             "Bugs Funcionais e de Layout (BUG)",
@@ -637,18 +318,12 @@
         {
           "attempts": [
             {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
-            },
-            {
-              "state": "failed"
+              "state": "passed"
             }
           ],
-          "displayError": "AssertionError: Timed out retrying after 10000ms: Expected to find element: `[data-cy=\"add-column-btn\"], button`, but never found it.\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:253:9)",
-          "duration": 44893,
-          "state": "failed",
+          "displayError": null,
+          "duration": 2440,
+          "state": "passed",
           "title": [
             "Validação de Bugs Reportados",
             "Testes de Regressão",
@@ -659,10 +334,10 @@
       "video": "C:\\Users\\Edcleryton\\Documents\\desafio_tecnico\\cypress\\videos\\06-bug-validation.cy.js.mp4"
     }
   ],
-  "startedTestsAt": "2025-08-12T16:49:50.579Z",
-  "totalDuration": 393510,
-  "totalFailed": 12,
-  "totalPassed": 0,
+  "startedTestsAt": "2025-08-12T17:08:35.919Z",
+  "totalDuration": 29160,
+  "totalFailed": 0,
+  "totalPassed": 12,
   "totalPending": 0,
   "totalSkipped": 0,
   "totalSuites": 5,

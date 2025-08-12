@@ -1,86 +1,86 @@
 {
-  "startTime": "2025-08-12T16:56:25.235Z",
-  "endTime": "2025-08-12T16:56:25.239Z",
+  "startTime": "2025-08-12T17:09:06.312Z",
+  "endTime": "2025-08-12T17:09:06.314Z",
   "totalTests": 12,
-  "passedTests": 0,
-  "failedTests": 12,
+  "passedTests": 12,
+  "failedTests": 0,
   "skippedTests": 0,
-  "duration": 4,
+  "duration": 2,
   "specs": [
     {
       "name": "06-bug-validation.cy.js",
       "tests": [
         {
           "title": "Validação de Bugs Reportados > Segurança (SEC) > SEC-001: Deve prevenir XSS em títulos de colunas",
-          "state": "failed",
-          "duration": 15312,
-          "error": "TypeError: cy.get(...).should(...).or is not a function\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:29:9)"
+          "state": "passed",
+          "duration": 3580,
+          "error": null
         },
         {
           "title": "Validação de Bugs Reportados > Usabilidade (USAB) > USAB-001: Deve exibir confirmação ao excluir coluna com tarefas",
-          "state": "failed",
-          "duration": 44120,
-          "error": "AssertionError: Timed out retrying after 10000ms: Expected to find element: `[data-cy=\"add-column-btn\"], button`, but never found it.\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:37:9)"
+          "state": "passed",
+          "duration": 2259,
+          "error": null
         },
         {
           "title": "Validação de Bugs Reportados > Usabilidade (USAB) > USAB-002: Deve exibir confirmação ao excluir tarefas",
-          "state": "failed",
-          "duration": 45223,
-          "error": "AssertionError: Timed out retrying after 10000ms: Expected to find element: `[data-cy=\"add-task-button\"], button:contains(\"Adicionar Tarefa\")`, but never found it.\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/support/commands.js:14:5)"
+          "state": "passed",
+          "duration": 2252,
+          "error": null
         },
         {
           "title": "Validação de Bugs Reportados > Usabilidade (USAB) > USAB-003: Deve fornecer feedback visual durante drag-and-drop",
-          "state": "failed",
-          "duration": 14632,
-          "error": "TypeError: cy.get(...).should(...).or is not a function\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:81:9)"
+          "state": "passed",
+          "duration": 2236,
+          "error": null
         },
         {
           "title": "Validação de Bugs Reportados > Bugs Funcionais e de Layout (BUG) > BUG-001: Deve truncar nomes longos de colunas",
-          "state": "failed",
-          "duration": 45059,
-          "error": "AssertionError: Timed out retrying after 10000ms: Expected to find element: `[data-cy=\"add-column-btn\"], button`, but never found it.\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:91:9)"
+          "state": "passed",
+          "duration": 2230,
+          "error": null
         },
         {
           "title": "Validação de Bugs Reportados > Bugs Funcionais e de Layout (BUG) > BUG-002: Deve validar nomes de colunas com apenas espaços",
-          "state": "failed",
-          "duration": 15215,
-          "error": "TypeError: cy.get(...).contains(...).should(...).or is not a function\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:121:9)"
+          "state": "passed",
+          "duration": 2218,
+          "error": null
         },
         {
           "title": "Validação de Bugs Reportados > Bugs Funcionais e de Layout (BUG) > BUG-003: Deve prevenir tags duplicadas (case-insensitive)",
-          "state": "failed",
-          "duration": 45223,
-          "error": "AssertionError: Timed out retrying after 10000ms: Expected to find element: `[data-cy=\"add-task-button\"], button:contains(\"Adicionar Tarefa\")`, but never found it.\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/support/commands.js:14:5)"
+          "state": "passed",
+          "duration": 2220,
+          "error": null
         },
         {
           "title": "Validação de Bugs Reportados > Bugs Funcionais e de Layout (BUG) > BUG-004: Deve gerenciar overflow de tags em cards",
-          "state": "failed",
-          "duration": 14683,
-          "error": "TypeError: cy.get(...).first(...).should(...).or is not a function\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:167:9)"
+          "state": "passed",
+          "duration": 2288,
+          "error": null
         },
         {
           "title": "Validação de Bugs Reportados > Bugs Funcionais e de Layout (BUG) > BUG-005: Deve aplicar cor de fundo completa em tags com múltiplas palavras",
-          "state": "failed",
-          "duration": 45251,
-          "error": "AssertionError: Timed out retrying after 10000ms: Expected to find element: `[data-cy=\"add-task-button\"], button:contains(\"Adicionar Tarefa\")`, but never found it.\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/support/commands.js:14:5)"
+          "state": "passed",
+          "duration": 2456,
+          "error": null
         },
         {
           "title": "Validação de Bugs Reportados > Bugs Funcionais e de Layout (BUG) > BUG-006: Deve persistir preferência de tema após recarregar a página",
-          "state": "failed",
-          "duration": 15252,
-          "error": "TypeError: cy.get(...).should(...).or is not a function\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:194:56)"
+          "state": "passed",
+          "duration": 2453,
+          "error": null
         },
         {
           "title": "Validação de Bugs Reportados > Bugs Funcionais e de Layout (BUG) > BUG-007: Deve aplicar cor padrão visível para tags criadas sem cor",
-          "state": "failed",
-          "duration": 45407,
-          "error": "AssertionError: Timed out retrying after 10000ms: Expected to find element: `[data-cy=\"add-task-button\"], button:contains(\"Adicionar Tarefa\")`, but never found it.\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/support/commands.js:14:5)"
+          "state": "passed",
+          "duration": 2418,
+          "error": null
         },
         {
           "title": "Validação de Bugs Reportados > Testes de Regressão > Deve executar todos os cenários de bug em sequência",
-          "state": "failed",
-          "duration": 44893,
-          "error": "AssertionError: Timed out retrying after 10000ms: Expected to find element: `[data-cy=\"add-column-btn\"], button`, but never found it.\n    at Context.eval (webpack://kanban-e2e-tests/./cypress/e2e/06-bug-validation.cy.js:253:9)"
+          "state": "passed",
+          "duration": 2440,
+          "error": null
         }
       ]
     }
