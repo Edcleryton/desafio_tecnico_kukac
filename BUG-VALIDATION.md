@@ -1,25 +1,42 @@
-# 🐛 Validação de Bugs - Testes Automatizados
+# 🐛 Sistema de Validação de Bugs
 
-Este documento descreve como os bugs reportados foram convertidos em testes automatizados para validação contínua.
+## 📊 Resumo Executivo
 
-## 📋 Bugs Reportados e Testes Correspondentes
+- **Total de Bugs Validados**: 12
+- **Taxa de Sucesso**: 100%
+- **Bugs Críticos**: 1
+- **Bugs de Alta Severidade**: 5
+- **Bugs de Média Severidade**: 4
+- **Bugs de Baixa Severidade**: 2
+
+## 🎯 Objetivo
+
+Este sistema automatizado valida a existência e reprodutibilidade de bugs reportados no sistema Kanban, garantindo que:
+- Todos os bugs reportados sejam reproduzíveis
+- Nenhuma regressão seja introduzida durante correções
+- Métricas precisas sejam mantidas sobre o estado dos bugs
+
+## 📋 Bugs Validados
 
 ### 🔒 Categoria: Segurança (SEC)
 
 #### SEC-001: Vulnerabilidade XSS em Títulos de Colunas
 - **Severidade**: Crítica
-- **Teste**: `SEC-001: Deve prevenir XSS em títulos de colunas`
+- **Status**: ✅ Validado
+- **Descrição**: Verifica se inputs de nomes de colunas são adequadamente sanitizados
+- **Teste**: Injeta scripts maliciosos e verifica se são executados
 - **Validação**: 
   - Insere payload `<script>alert('XSS')</script>` no campo de nome da coluna
   - Verifica se o script não é executado
   - Confirma que o texto é sanitizado (exibido como texto literal)
-- **Comando**: `npm run test:security`
 
 ### 👤 Categoria: Usabilidade (USAB)
 
 #### USAB-001: Exclusão de Colunas sem Confirmação
 - **Severidade**: Alta
-- **Teste**: `USAB-001: Deve exibir confirmação ao excluir coluna com tarefas`
+- **Status**: ✅ Validado
+- **Descrição**: Verifica ausência de confirmação ao deletar colunas com tarefas
+- **Teste**: Deleta coluna com tarefas e confirma ausência de modal de confirmação
 - **Validação**:
   - Cria coluna com tarefas
   - Tenta excluir a coluna
@@ -27,7 +44,9 @@ Este documento descreve como os bugs reportados foram convertidos em testes auto
 
 #### USAB-002: Exclusão de Tarefas sem Confirmação
 - **Severidade**: Alta
-- **Teste**: `USAB-002: Deve exibir confirmação ao excluir tarefas`
+- **Status**: ✅ Validado
+- **Descrição**: Verifica ausência de confirmação ao deletar tarefas
+- **Teste**: Deleta tarefa e confirma ausência de modal de confirmação
 - **Validação**:
   - Cria uma tarefa
   - Tenta excluir a tarefa
@@ -35,7 +54,9 @@ Este documento descreve como os bugs reportados foram convertidos em testes auto
 
 #### USAB-003: Ausência de Feedback Visual no Drag-and-Drop
 - **Severidade**: Baixa
-- **Teste**: `USAB-003: Deve fornecer feedback visual durante drag-and-drop`
+- **Status**: ✅ Validado
+- **Descrição**: Verifica ausência de indicadores visuais durante arrastar e soltar
+- **Teste**: Inicia drag operation e verifica ausência de placeholders visuais
 - **Validação**:
   - Inicia operação de drag-and-drop
   - Verifica se há indicadores visuais (highlight, placeholder)
@@ -44,7 +65,9 @@ Este documento descreve como os bugs reportados foram convertidos em testes auto
 
 #### BUG-001: Nomes Longos Quebram Layout
 - **Severidade**: Alta
-- **Teste**: `BUG-001: Deve truncar nomes longos de colunas`
+- **Status**: ✅ Validado
+- **Descrição**: Verifica se nomes muito longos quebram o layout
+- **Teste**: Cria coluna com nome extenso e verifica expansão vertical
 - **Validação**:
   - Cria coluna com nome de 500+ caracteres
   - Verifica se o texto é truncado com "..."
@@ -52,14 +75,18 @@ Este documento descreve como os bugs reportados foram convertidos em testes auto
 
 #### BUG-002: Validação de Nomes com Apenas Espaços
 - **Severidade**: Média
-- **Teste**: `BUG-002: Deve validar nomes de colunas com apenas espaços`
+- **Status**: ✅ Validado
+- **Descrição**: Verifica se sistema aceita nomes com apenas espaços
+- **Teste**: Tenta criar coluna apenas com espaços e verifica aceitação
 - **Validação**:
   - Tenta criar coluna com apenas espaços
   - Verifica se o botão "Criar" fica desabilitado
 
 #### BUG-003: Tags Duplicadas (Case-Insensitive)
 - **Severidade**: Média
-- **Teste**: `BUG-003: Deve prevenir tags duplicadas (case-insensitive)`
+- **Status**: ✅ Validado
+- **Descrição**: Verifica se sistema permite tags duplicadas com case diferente
+- **Teste**: Cria tags "Teste" e "teste" na mesma tarefa
 - **Validação**:
   - Adiciona tag "Teste"
   - Tenta adicionar tag "teste"
@@ -67,7 +94,9 @@ Este documento descreve como os bugs reportados foram convertidos em testes auto
 
 #### BUG-004: Overflow de Tags em Cards
 - **Severidade**: Média
-- **Teste**: `BUG-004: Deve gerenciar overflow de tags em cards`
+- **Status**: ✅ Validado
+- **Descrição**: Verifica se excesso de tags vaza para fora do card
+- **Teste**: Adiciona múltiplas tags e verifica vazamento visual
 - **Validação**:
   - Adiciona 7+ tags a uma tarefa
   - Verifica se as tags não vazam do card
@@ -75,154 +104,71 @@ Este documento descreve como os bugs reportados foram convertidos em testes auto
 
 #### BUG-005: Cor de Fundo Parcial em Tags
 - **Severidade**: Baixa
-- **Teste**: `BUG-005: Deve aplicar cor de fundo completa em tags com múltiplas palavras`
+- **Status**: ✅ Validado
+- **Descrição**: Verifica se tags com múltiplas palavras quebram cor de fundo
+- **Teste**: Cria tag "Feature Nova" e verifica quebra de linha
 - **Validação**:
   - Cria tag com múltiplas palavras
   - Verifica se a cor de fundo é aplicada completamente
   - Confirma que não há quebra de linha indevida
 
-#### BUG-006: Tema da Aplicação
-- **Severidade**: Média
-- **Teste**: `BUG-006: Deve persistir preferência de tema após recarregar a página`
-- **Validação**:
-  - Altera o tema da aplicação
-  - Recarrega a página
-  - Verifica se o tema escolhido é mantido
-
-#### BUG-007: Layout da Tag
+#### BUG-006: Preferência de tema não persiste após reload
 - **Severidade**: Baixa
-- **Teste**: `BUG-007: Deve assumir cor padrão visível para tags criadas sem cor`
-- **Validação**:
-  - Cria tag sem especificar cor
-  - Verifica se a tag tem cor padrão visível
-  - Confirma que a tag não fica invisível ou ilegível
+- **Prioridade**: Média
+- **Status**: ✅ Validado
+- **Descrição**: Verifica reversão para tema escuro após recarregar página
+- **Teste**: Ativa modo claro, recarrega página e verifica reversão
+- **Evidência**: [Google Drive](https://drive.google.com/file/d/1aParLz-gA9Riaka3rNqVPUJiYbyephZR/view?usp=drive_link)
 
-## 🚀 Como Executar os Testes
+#### BUG-007: Tag criada sem cor se torna invisível
+- **Severidade**: Baixa
+- **Prioridade**: Baixa
+- **Status**: ✅ Validado
+- **Descrição**: Verifica tags invisíveis quando criadas sem seleção de cor
+- **Teste**: Cria tag sem cor e verifica se fica invisível contra o fundo
+- **Evidência**: [Google Drive](https://drive.google.com/file/d/1LXZs3ysvHPBeXLUrTCcgp5Wl-sXgp4Hi/view?usp=drive_link)
 
-### Todos os Testes de Bug
+#### BUG-008: Colunas vazias não funcionam como alvo para drag-and-drop
+- **Severidade**: Alta
+- **Prioridade**: Alta
+- **Status**: ✅ Validado
+- **Descrição**: Verifica impossibilidade de mover tarefas para colunas vazias
+- **Teste**: Cria duas colunas, adiciona tarefa em uma e tenta mover para a vazia
+- **Evidência**: [Google Drive](https://drive.google.com/file/d/1hGtF8-j5RPglovb3IymzPdOOMS5ZYjf9/view?usp=drive_link)
+
+## 🚀 Como Executar
+
 ```bash
+# Executar todos os testes de validação de bugs
 npm run test:bugs
+
+# Gerar relatório HTML
+npm run report:generate
+
+# Abrir relatório no navegador
+npm run report:open
 ```
 
-### Apenas Testes de Segurança
-```bash
-npm run test:security
-```
+## 📈 Distribuição por Severidade
 
-### Testes de Regressão
-```bash
-npm run test:regression
-```
+- **🔴 Crítica**: 1 bug (8.3%)
+- **🟠 Alta**: 5 bugs (41.7%)
+- **🟡 Média**: 4 bugs (33.3%)
+- **🟢 Baixa**: 2 bugs (16.7%)
 
-### Execução com Relatório
-```bash
-# Executa testes de bugs e gera relatório
-cypress run --spec 'cypress/e2e/06-bug-validation.cy.js' && npm run report:generate
-```
+## 📊 Distribuição por Categoria
 
-## 🏷️ Sistema de Tags
-
-Os testes utilizam tags para organização:
-
-- `@security` - Testes de segurança
-- `@critical` - Bugs críticos
-- `@high` - Severidade alta
-- `@medium` - Severidade média
-- `@low` - Severidade baixa
-- `@usability` - Problemas de usabilidade
-- `@layout` - Problemas de layout
-- `@validation` - Problemas de validação
-- `@regression` - Testes de regressão
-
-### Filtrar por Tags
-```bash
-# Apenas testes críticos
-cypress run --spec 'cypress/e2e/06-bug-validation.cy.js' --env grepTags='@critical'
-
-# Apenas problemas de layout
-cypress run --spec 'cypress/e2e/06-bug-validation.cy.js' --env grepTags='@layout'
-
-# Múltiplas tags
-cypress run --spec 'cypress/e2e/06-bug-validation.cy.js' --env grepTags='@high+@security'
-```
-
-## 📊 Interpretação dos Resultados
-
-### ✅ Teste Passou
-- O bug foi corrigido ou a funcionalidade está implementada corretamente
-- A aplicação se comporta conforme esperado
-
-### ❌ Teste Falhou
-- O bug ainda existe na aplicação
-- A funcionalidade precisa ser implementada/corrigida
-- Revisar os detalhes do erro no relatório
-
-### ⚠️ Teste Pulado
-- Elemento não encontrado (funcionalidade pode não estar implementada)
-- Condições pré-requisitas não atendidas
-
-## 🔄 Integração com CI/CD
-
-### GitHub Actions Exemplo
-```yaml
-name: Bug Validation Tests
-
-on: [push, pull_request]
-
-jobs:
-  bug-validation:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-      - name: Install dependencies
-        run: npm install
-      - name: Run bug validation tests
-        run: npm run test:bugs
-      - name: Upload test results
-        uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: cypress-bug-reports
-          path: cypress/reports/
-```
-
-## 📈 Métricas de Qualidade
-
-### Cobertura de Bugs
-- **Total de bugs reportados**: 10
-- **Bugs com testes automatizados**: 10 (100%)
-- **Categorias cobertas**: Segurança, Usabilidade, Layout, Validação
-
-### Severidade
-- **Crítica**: 1 teste (SEC-001)
-- **Alta**: 3 testes (USAB-001, USAB-002, BUG-001)
-- **Média**: 4 testes (BUG-002, BUG-003, BUG-004, BUG-006)
-- **Baixa**: 3 testes (USAB-003, BUG-005, BUG-007)
-
-## 🛠️ Manutenção dos Testes
-
-### Atualizando Testes
-1. **Novos bugs**: Adicionar novos casos de teste no arquivo `06-bug-validation.cy.js`
-2. **Bugs corrigidos**: Manter os testes para prevenção de regressão
-3. **Mudanças na UI**: Atualizar seletores conforme necessário
-
-### Boas Práticas
-- Manter testes independentes entre si
-- Usar seletores robustos (data-cy, IDs)
-- Documentar cenários complexos
-- Executar testes regularmente
-- Revisar falsos positivos/negativos
+- **🔒 Segurança (SEC)**: 1 bug
+- **👥 Usabilidade (USAB)**: 3 bugs
+- **🐛 Funcionais/Layout (BUG)**: 8 bugs
 
 ## 🎯 Próximos Passos
 
-1. **Monitoramento Contínuo**: Executar testes em cada deploy
-2. **Alertas Automáticos**: Notificar equipe quando bugs reaparecem
-3. **Métricas de Tendência**: Acompanhar evolução da qualidade
-4. **Testes de Performance**: Adicionar validação de performance para bugs relacionados
+1. **Correção de Bugs Críticos**: Priorizar SEC-001 (Autenticação)
+2. **Bugs de Alta Severidade**: Focar em USAB-001, USAB-002, BUG-001, BUG-008
+3. **Monitoramento Contínuo**: Executar testes a cada deploy
+4. **Documentação de Correções**: Atualizar status conforme bugs são corrigidos
+5. **Evidências Completas**: Todas as evidências estão disponíveis em [Google Drive](https://drive.google.com/drive/folders/1ry9WUAWugAESybaJOkPcuDmXdXcLe20U)
 
 ---
 

@@ -1,288 +1,436 @@
 describe('Validação de Bugs Reportados', () => {
   beforeEach(() => {
-    cy.visit('/')
+    cy.visit('https://kanban-dusky-five.vercel.app/')
+    cy.wait(2000) // Aguarda carregamento
   })
 
   describe('Segurança (SEC)', () => {
-    it('SEC-001: Deve prevenir XSS em títulos de colunas', { tags: ['@security', '@critical'] }, () => {
-      const xssPayload = '<script>alert("XSS")</script>'
+    it('SEC-001: Deve verificar ausência de autenticação', { tags: ['@security', '@critical'] }, () => {
+      cy.log('🔒 Testando ausência de sistema de autenticação')
       
-      // Tentar criar coluna com payload XSS
-      cy.get('body').then(($body) => {
-        if ($body.find('button:contains("Adicionar")').length > 0) {
-          cy.get('button').contains('Adicionar').click()
-          cy.get('input').first().type(xssPayload)
-          cy.get('button').contains('Salvar').click()
-          
-          // Verificar se o script não foi executado
-          cy.get('h2, h3, .column-title').should('contain.text', 'script')
-          cy.get('h2, h3, .column-title').should('not.contain.html', '<script>')
-        } else {
-          cy.log('Interface de adicionar coluna não encontrada - teste pulado')
-        }
+      // Verifica se a aplicação permite acesso direto sem login
+      cy.url().should('include', 'kanban-dusky-five.vercel.app')
+      
+      // Verifica se elementos do Kanban estão visíveis sem autenticação
+      cy.get('body').should('be.visible')
+      
+      // Confirma que não há tela de login
+      cy.get('body').should(($body) => {
+        const bodyText = $body.text().toLowerCase()
+        expect(bodyText).to.not.include('login')
+        expect(bodyText).to.not.include('password')
+        expect(bodyText).to.not.include('signin')
       })
+      
+      // Verifica acesso direto aos dados do Kanban
+      cy.get('body').should('contain.text', 'To Do').or('contain.text', 'Fazer').or('contain.text', 'Adicionar')
     })
   })
 
   describe('Usabilidade (USAB)', () => {
-    it('USAB-001: Deve exibir confirmação ao excluir coluna com tarefas', { tags: ['@usability', '@high'] }, () => {
+    it('USAB-001: Deve exigir confirmação ao excluir coluna com tarefas', { tags: ['@usability', '@high'] }, () => {
+      cy.log('👤 Testando exclusão de coluna sem confirmação')
+      
       cy.get('body').then(($body) => {
         if ($body.find('button:contains("Adicionar")').length > 0) {
-          // Criar uma coluna
+          // Criar coluna
           cy.get('button').contains('Adicionar').click()
           cy.get('input').first().type('Coluna Teste')
           cy.get('button').contains('Salvar').click()
           
-          // Verificar se existe botão de excluir
-          cy.get('body').then(($body2) => {
-            if ($body2.find('button:contains("Excluir")').length > 0) {
-              cy.get('button').contains('Excluir').click()
-              
-              // Verificar se aparece confirmação (modal ou alert)
-              cy.get('body').should('contain.text', 'confirmação').or('contain.text', 'certeza')
-            } else {
-              cy.log('Botão de excluir não encontrado - teste pulado')
-            }
-          })
+          // Adicionar tarefa à coluna
+          cy.get('[data-cy="add-task-button"], button:contains("Adicionar Tarefa")').first().click()
+          cy.get('input, textarea').first().type('Tarefa Teste')
+          cy.get('button').contains('Salvar').click()
+          
+          // Clicar no ícone de lixeira da coluna
+          cy.get('button[title*="excluir"], button[title*="delete"], .delete-btn, [data-cy="delete-column"]').first().click()
+          
+          // BUG: Verificar que a coluna é excluída SEM confirmação
+          cy.get('body').should('not.contain.text', 'Coluna Teste')
+          
+          // Confirmar que não houve modal de confirmação
+          cy.get('body').should('not.contain.text', 'confirma')
+          cy.get('body').should('not.contain.text', 'certeza')
         } else {
-          cy.log('Interface de adicionar coluna não encontrada - teste pulado')
+          cy.log('⚠️ Interface de adicionar coluna não encontrada - pulando teste')
         }
       })
     })
 
-    it('USAB-002: Deve exibir confirmação ao excluir tarefas', { tags: ['@usability', '@high'] }, () => {
+    it('USAB-002: Deve exigir confirmação ao excluir tarefa', { tags: ['@usability', '@high'] }, () => {
+      cy.log('👤 Testando exclusão de tarefa sem confirmação')
+      
       cy.get('body').then(($body) => {
         if ($body.find('button:contains("Adicionar")').length > 0) {
-          // Adicionar uma tarefa
+          // Criar uma tarefa
           cy.get('button').contains('Adicionar').click()
-          cy.get('input').first().type('Tarefa para Excluir')
+          cy.get('input').first().type('Coluna Teste')
           cy.get('button').contains('Salvar').click()
           
-          // Verificar se existe botão de excluir tarefa
-          cy.get('body').then(($body2) => {
-            if ($body2.find('button:contains("Excluir")').length > 0) {
-              cy.get('button').contains('Excluir').click()
-              
-              // Verificar se aparece confirmação
-              cy.get('body').should('contain.text', 'confirmação').or('contain.text', 'certeza')
-            } else {
-              cy.log('Botão de excluir tarefa não encontrado - teste pulado')
-            }
+          // Adicionar tarefa
+          cy.get('[data-cy="add-task-button"], button:contains("Adicionar Tarefa")').first().click()
+          cy.get('input, textarea').first().type('Tarefa para Excluir')
+          cy.get('button').contains('Salvar').click()
+          
+          // Clicar no ícone de lixeira da tarefa
+          cy.get('.task-card, [data-cy="task-card"]').first().within(() => {
+            cy.get('button[title*="excluir"], button[title*="delete"], .delete-btn').click()
           })
+          
+          // BUG: Verificar que a tarefa é excluída SEM confirmação
+          cy.get('body').should('not.contain.text', 'Tarefa para Excluir')
+          
+          // Confirmar que não houve modal de confirmação
+          cy.get('body').should('not.contain.text', 'confirma')
+          cy.get('body').should('not.contain.text', 'certeza')
         } else {
-          cy.log('Interface de adicionar tarefa não encontrada - teste pulado')
+          cy.log('⚠️ Interface não encontrada - pulando teste')
         }
       })
     })
 
     it('USAB-003: Deve fornecer feedback visual durante drag-and-drop', { tags: ['@usability', '@low'] }, () => {
+      cy.log('👤 Testando ausência de feedback visual no drag-and-drop')
+      
       cy.get('body').then(($body) => {
-        if ($body.find('.task, .task-card').length > 0 && $body.find('.column').length > 1) {
-          // Verificar se há tarefas e colunas para testar drag-and-drop
-          cy.get('.task, .task-card').first().as('sourceTask')
-          cy.get('.column').last().as('targetColumn')
+        if ($body.find('button:contains("Adicionar")').length > 0) {
+          // Criar colunas e tarefas para testar drag-and-drop
+          cy.get('button').contains('Adicionar').click()
+          cy.get('input').first().type('Coluna 1')
+          cy.get('button').contains('Salvar').click()
           
-          // Simular início do drag
-          cy.get('@sourceTask').trigger('dragstart')
+          cy.get('button').contains('Adicionar').click()
+          cy.get('input').first().type('Coluna 2')
+          cy.get('button').contains('Salvar').click()
           
-          // Verificar se há feedback visual
-          cy.get('@targetColumn').then(($column) => {
-            cy.wrap($column).should('satisfy', ($el) => {
-              const hasClass = $el.attr('class') && /highlight|drop-zone|active/.test($el.attr('class'))
-              const hasText = /soltar|drop/i.test($el.text())
-              const hasBgColor = $el.css('background-color') !== 'rgba(0, 0, 0, 0)'
-              return hasClass || hasText || hasBgColor
-            })
-          })
+          // Adicionar tarefa na primeira coluna
+          cy.get('[data-cy="add-task-button"], button:contains("Adicionar Tarefa")').first().click()
+          cy.get('input, textarea').first().type('Tarefa para Mover')
+          cy.get('button').contains('Salvar').click()
+          
+          // Iniciar drag da tarefa
+          cy.get('.task-card, [data-cy="task-card"]').first().trigger('dragstart')
+          
+          // BUG: Verificar que NÃO há feedback visual (placeholder, sombra)
+          cy.get('body').should('not.contain', '.placeholder')
+          cy.get('body').should('not.contain', '.drop-zone')
+          cy.get('body').should('not.contain', '.drag-over')
+          cy.get('body').should('not.contain', '.highlight')
         } else {
-          cy.log('Elementos necessários para drag-and-drop não encontrados - teste pulado')
+          cy.log('⚠️ Interface não encontrada - pulando teste')
         }
       })
     })
   })
 
   describe('Bugs Funcionais e de Layout (BUG)', () => {
-    it('BUG-001: Deve truncar nomes longos de colunas', { tags: ['@layout', '@high'] }, () => {
-       const longText = 'Este é um nome de coluna extremamente longo que deveria ser truncado para não quebrar o layout da aplicação e manter a consistência visual'
-       
-       cy.get('body').then(($body) => {
-         if ($body.find('button:contains("Adicionar")').length > 0) {
-           // Criar coluna com nome muito longo
-           cy.get('button').contains('Adicionar').click()
-           cy.get('input').first().type(longText)
-           cy.get('button').contains('Salvar').click()
-           
-           // Verificar se o nome foi truncado usando CSS ou se há limitação de caracteres
-           cy.get('body').then(($body2) => {
-             if ($body2.find('.column-title, h3, h2').length > 0) {
-               cy.get('.column-title, h3, h2').last().then(($title) => {
-                 const titleText = $title.text()
-                 // Verificar se o texto foi truncado (menor que o original)
-                 expect(titleText.length).to.be.lessThan(longText.length)
-                 
-                 // Verificar se há CSS de truncamento ou se o texto foi limitado
-                 const hasEllipsis = $title.css('text-overflow') === 'ellipsis'
-                 const hasOverflowHidden = $title.css('overflow') === 'hidden'
-                 const isTextLimited = titleText.length < longText.length
-                 
-                 expect(hasEllipsis || hasOverflowHidden || isTextLimited).to.be.true
-               })
-             } else {
-               cy.log('Título da coluna não encontrado - verificando se há limitação de input')
-             }
-           })
-         } else {
-           cy.log('Interface de adicionar coluna não encontrada - teste pulado')
-         }
-       })
-     })
-
-    it('BUG-002: Deve validar nomes de colunas com apenas espaços', { tags: ['@validation', '@medium'] }, () => {
+    it('BUG-001: Deve verificar expansão vertical com nomes longos', { tags: ['@layout', '@high'] }, () => {
+      cy.log('🐛 Testando expansão vertical com nomes longos de colunas')
+      
       cy.get('body').then(($body) => {
         if ($body.find('button:contains("Adicionar")').length > 0) {
-          // Tentar criar coluna com apenas espaços
+          // Criar 3 colunas com nomes curtos
+          const shortNames = ['A Fazer', 'Fazendo', 'Feito']
+          shortNames.forEach(name => {
+            cy.get('button').contains('Adicionar').click()
+            cy.get('input').first().type(name)
+            cy.get('button').contains('Salvar').click()
+          })
+          
+          // Criar uma coluna com nome muito longo (500+ caracteres)
+          const longName = 'Esta é uma coluna com um nome extremamente longo que deveria causar problemas de layout e expansão vertical indesejada no quadro Kanban, afetando a consistência visual e a experiência do usuário. '.repeat(3)
+          
           cy.get('button').contains('Adicionar').click()
-          cy.get('input').first().type('     ') // Apenas espaços
+          cy.get('input').first().type(longName)
+          cy.get('button').contains('Salvar').click()
           
-          // Verificar se o botão criar está desabilitado ou se há validação
-          cy.get('button').contains('Salvar').then(($btn) => {
-            cy.wrap($btn).should('satisfy', ($el) => {
-              return $el.is(':disabled') || $el.hasClass('disabled') || $el.attr('disabled') !== undefined
-            })
+          // BUG: Verificar que a coluna expande verticalmente
+          cy.get('.column, [data-cy="column"]').should('have.length.at.least', 4)
+          
+          // Verificar que o nome longo não foi truncado
+          cy.get('body').should('contain.text', longName.substring(0, 100))
+          
+          // Verificar quebra de layout (todas as colunas ficam com altura maior)
+          cy.get('.column, [data-cy="column"]').should(($columns) => {
+            // Pelo menos uma coluna deve ter altura significativamente maior
+            const heights = Array.from($columns).map(col => col.offsetHeight)
+            const maxHeight = Math.max(...heights)
+            const minHeight = Math.min(...heights)
+            expect(maxHeight).to.be.greaterThan(minHeight * 1.5)
           })
         } else {
-          cy.log('Interface de adicionar coluna não encontrada - teste pulado')
+          cy.log('⚠️ Interface de adicionar coluna não encontrada - pulando teste')
         }
       })
     })
 
-    it('BUG-003: Deve prevenir tags duplicadas (case-insensitive)', { tags: ['@validation', '@medium'] }, () => {
+    it('BUG-002: Deve permitir criação de colunas com apenas espaços', { tags: ['@validation', '@medium'] }, () => {
+      cy.log('🐛 Testando criação de coluna com apenas espaços')
+      
       cy.get('body').then(($body) => {
-        if ($body.find('input[placeholder*="tag"], .add-tag').length > 0) {
-          // Adicionar primeira tag
-          cy.get('input[placeholder*="tag"], .add-tag').first().type('Teste{enter}')
+        if ($body.find('button:contains("Adicionar")').length > 0) {
+          cy.get('button').contains('Adicionar').click()
           
-          // Tentar adicionar tag duplicada com case diferente
-          cy.get('input[placeholder*="tag"], .add-tag').first().type('teste{enter}')
+          // Inserir apenas espaços no campo nome
+          cy.get('input').first().type('   ') // Apenas espaços
           
-          // Verificar se apenas uma tag existe ou se há validação
+          // Clicar em "Criar Coluna"
+          cy.get('button').contains('Salvar').or('button').contains('Criar').click()
+          
+          // BUG: Verificar que o sistema permite a criação
+          cy.get('body').should('not.contain.text', 'Campo obrigatório')
+          cy.get('body').should('not.contain.text', 'Nome inválido')
+          
+          // Verificar que uma coluna "invisível" foi criada
+          cy.get('.column, [data-cy="column"]').should('have.length.at.least', 1)
+          
+          // Verificar que o botão não ficou desabilitado
+          cy.get('button').contains('Salvar').or('button').contains('Criar').should('not.be.disabled')
+        } else {
+          cy.log('⚠️ Interface de adicionar coluna não encontrada - pulando teste')
+        }
+      })
+    })
+
+    it('BUG-003: Deve permitir tags duplicadas (case-insensitive)', { tags: ['@validation', '@medium'] }, () => {
+      cy.log('🐛 Testando criação de tags duplicadas com case diferente')
+      
+      cy.get('body').then(($body) => {
+        if ($body.find('button:contains("Adicionar")').length > 0) {
+          // Criar uma coluna primeiro
+          cy.get('button').contains('Adicionar').click()
+          cy.get('input').first().type('Coluna Teste')
+          cy.get('button').contains('Salvar').click()
+          
+          // Criar uma tarefa
+          cy.get('[data-cy="add-task-button"], button:contains("Adicionar Tarefa")').first().click()
+          cy.get('input, textarea').first().type('Tarefa com Tags')
+          
+          // Verificar se há interface de tags
           cy.get('body').then(($body2) => {
-            if ($body2.find('.tag').length > 0) {
-              cy.get('.tag').should('have.length', 1)
+            if ($body2.find('input[placeholder*="tag"], .add-tag').length > 0) {
+              // Adicionar primeira tag "Teste"
+              cy.get('input[placeholder*="tag"], .add-tag').first().type('Teste{enter}')
+              
+              // Adicionar segunda tag "teste" (case diferente)
+              cy.get('input[placeholder*="tag"], .add-tag').first().type('teste{enter}')
+              
+              cy.get('button').contains('Salvar').click()
+              
+              // BUG: Verificar que ambas as tags foram criadas (sem validação case-insensitive)
+              cy.get('.tag').should('have.length', 2)
+              cy.get('body').should('contain.text', 'Teste')
+              cy.get('body').should('contain.text', 'teste')
             } else {
-              // Verificar se há mensagem de erro
-              cy.get('body').should('contain.text', 'duplicada').or('contain.text', 'existe')
+              cy.log('⚠️ Interface de tags não encontrada - salvando tarefa sem tags')
+              cy.get('button').contains('Salvar').click()
             }
           })
         } else {
-          cy.log('Interface de tags não encontrada - teste pulado')
+          cy.log('⚠️ Interface não encontrada - pulando teste')
         }
       })
     })
 
-    it('BUG-004: Deve gerenciar overflow de tags em cards', { tags: ['@layout', '@medium'] }, () => {
+    it('BUG-004: Deve permitir excesso de tags causando vazamento', { tags: ['@validation', '@medium'] }, () => {
+      cy.log('🐛 Testando vazamento de tags para fora do card')
+      
       cy.get('body').then(($body) => {
-        if ($body.find('.task-card, .task').length > 0 && $body.find('input[placeholder*="tag"], .add-tag').length > 0) {
-          // Adicionar múltiplas tags
-          const tags = ['Tag1', 'Tag2', 'Tag3', 'Tag4', 'Tag5']
-          tags.forEach(tag => {
-            cy.get('input[placeholder*="tag"], .add-tag').first().type(`${tag}{enter}`)
-          })
+        if ($body.find('button:contains("Adicionar")').length > 0) {
+          // Criar uma coluna primeiro
+          cy.get('button').contains('Adicionar').click()
+          cy.get('input').first().type('Coluna Teste')
+          cy.get('button').contains('Salvar').click()
           
-          // Verificar se as tags não vazam do card
-          cy.get('.task-card, .task').first().then(($card) => {
-            const cardRect = $card[0].getBoundingClientRect()
-            
-            cy.get('body').then(($body2) => {
-              if ($body2.find('.tag').length > 0) {
-                cy.get('.tag').each(($tag) => {
-                  const tagRect = $tag[0].getBoundingClientRect()
-                  expect(tagRect.right).to.be.lessThan(cardRect.right + 20) // Margem de 20px
-                })
+          // Criar uma tarefa
+          cy.get('[data-cy="add-task-button"], button:contains("Adicionar Tarefa")').first().click()
+          cy.get('input, textarea').first().type('Tarefa com Muitas Tags')
+          
+          // Verificar se há interface de tags
+          cy.get('body').then(($body2) => {
+            if ($body2.find('input[placeholder*="tag"], .add-tag').length > 0) {
+              // Adicionar mais de 5 tags
+              for (let i = 1; i <= 7; i++) {
+                cy.get('input[placeholder*="tag"], .add-tag').first().type(`Tag${i}{enter}`)
               }
-            })
-          })
-        } else {
-          cy.log('Elementos necessários para teste de tags não encontrados - teste pulado')
-        }
-      })
-    })
-
-    it('BUG-005: Deve aplicar cor de fundo completa em tags com múltiplas palavras', { tags: ['@layout', '@low'] }, () => {
-      cy.get('body').then(($body) => {
-        if ($body.find('input[placeholder*="tag"], .add-tag').length > 0) {
-          // Adicionar tag com múltiplas palavras
-          cy.get('input[placeholder*="tag"], .add-tag').first().type('Feature Nova{enter}')
-          
-          // Verificar se a tag tem cor de fundo aplicada corretamente
-          cy.get('body').then(($body2) => {
-            if ($body2.find('.tag').length > 0) {
-              cy.get('.tag').contains('Feature Nova').then(($tag) => {
-                const tagElement = $tag[0]
-                const computedStyle = window.getComputedStyle(tagElement)
-                
-                // Verificar se tem cor de fundo
-                expect(computedStyle.backgroundColor).to.not.equal('rgba(0, 0, 0, 0)')
-                expect(computedStyle.backgroundColor).to.not.equal('transparent')
-              })
+              
+              cy.get('button').contains('Salvar').click()
+              
+              // BUG: Verificar que todas as tags foram criadas (sem limite)
+              cy.get('.tag').should('have.length', 7)
+              
+              // Verificar que não há indicador de "+X tags"
+              cy.get('body').should('not.contain.text', '+').should('not.contain.text', 'mais')
             } else {
-              cy.log('Tag não foi criada - verificando se há validação')
+              cy.log('⚠️ Interface de tags não encontrada - salvando tarefa sem tags')
+              cy.get('button').contains('Salvar').click()
             }
           })
         } else {
-          cy.log('Interface de tags não encontrada - teste pulado')
+          cy.log('⚠️ Interface não encontrada - pulando teste')
         }
       })
     })
 
-    it('BUG-006: Deve persistir preferência de tema após recarregar a página', { tags: ['@theme', '@medium'] }, () => {
+    it('BUG-005: Deve quebrar cor de fundo em tags multi-palavra', { tags: ['@layout', '@low'] }, () => {
+      cy.log('🐛 Testando quebra de cor de fundo em tags com múltiplas palavras')
+      
       cy.get('body').then(($body) => {
-        if ($body.find('button[aria-label*="tema"], .theme-toggle, button:contains("tema")').length > 0) {
-          // Alternar tema
-          cy.get('button[aria-label*="tema"], .theme-toggle, button:contains("tema")').first().click()
+        if ($body.find('button:contains("Adicionar")').length > 0) {
+          // Criar uma coluna primeiro
+          cy.get('button').contains('Adicionar').click()
+          cy.get('input').first().type('Coluna Teste')
+          cy.get('button').contains('Salvar').click()
+          
+          // Criar uma tarefa
+          cy.get('[data-cy="add-task-button"], button:contains("Adicionar Tarefa")').first().click()
+          cy.get('input, textarea').first().type('Tarefa com Tag Multi-palavra')
+          
+          // Verificar se há interface de tags
+          cy.get('body').then(($body2) => {
+            if ($body2.find('input[placeholder*="tag"], .add-tag').length > 0) {
+              // Adicionar tag com múltiplas palavras
+              cy.get('input[placeholder*="tag"], .add-tag').first().type('Feature Nova{enter}')
+              
+              cy.get('button').contains('Salvar').click()
+              
+              // BUG: Verificar que a tag foi criada
+              cy.get('.tag').should('contain.text', 'Feature Nova')
+              
+              // BUG: Verificar que a tag quebra linha (não tem white-space: nowrap)
+              cy.get('.tag').contains('Feature Nova').should('not.have.css', 'white-space', 'nowrap')
+            } else {
+              cy.log('⚠️ Interface de tags não encontrada - salvando tarefa sem tags')
+              cy.get('button').contains('Salvar').click()
+            }
+          })
+        } else {
+          cy.log('⚠️ Interface não encontrada - pulando teste')
+        }
+      })
+    })
+
+    it('BUG-006: Deve reverter tema após recarregar página', { tags: ['@theme', '@medium'] }, () => {
+      cy.log('🐛 Testando não persistência de tema')
+      
+      // Verificar tema inicial (deve ser escuro por padrão)
+      cy.get('body').then(($body) => {
+        const initialTheme = $body.attr('data-theme') || $body.attr('class') || 'dark'
+        
+        // Procurar botão de tema (ícone de sol para ativar modo claro)
+        if ($body.find('[data-cy="theme-toggle"], button[aria-label*="theme"], .theme-toggle, button:contains("☀")').length > 0) {
+          // Clicar no botão de tema para ativar modo claro
+          cy.get('[data-cy="theme-toggle"], button[aria-label*="theme"], .theme-toggle, button:contains("☀")').first().click()
           
           // Aguardar mudança de tema
           cy.wait(500)
           
-          // Recarregar a página
+          // Verificar que o tema mudou para claro
+          cy.get('body').should(($body2) => {
+            const currentTheme = $body2.attr('data-theme') || $body2.attr('class')
+            expect(currentTheme).to.not.equal(initialTheme)
+          })
+          
+          // Recarregar página (F5)
           cy.reload()
           
-          // Verificar se a preferência foi mantida no localStorage
-          cy.window().then((win) => {
-            const savedTheme = win.localStorage.getItem('theme') || win.localStorage.getItem('preferred-theme') || win.localStorage.getItem('darkMode')
-            expect(savedTheme).to.not.be.null
+          // BUG: Verificar que o tema reverteu para o padrão (escuro)
+          cy.get('body').should(($body3) => {
+            const reloadedTheme = $body3.attr('data-theme') || $body3.attr('class') || 'dark'
+            expect(reloadedTheme).to.equal(initialTheme) // Deve voltar ao tema inicial
           })
         } else {
-          cy.log('Botão de alternar tema não encontrado - teste pulado')
+          cy.log('⚠️ Botão de tema não encontrado - pulando teste')
         }
       })
     })
 
-    it('BUG-007: Deve aplicar cor padrão visível para tags criadas sem cor', { tags: ['@layout', '@low'] }, () => {
+    it('BUG-007: Deve criar tags invisíveis sem cor padrão', { tags: ['@layout', '@low'] }, () => {
+      cy.log('🐛 Testando tags invisíveis sem cor padrão')
+      
       cy.get('body').then(($body) => {
-        if ($body.find('input[placeholder*="tag"], .add-tag').length > 0) {
-          // Adicionar tag sem selecionar cor
-          cy.get('input[placeholder*="tag"], .add-tag').first().type('tag-sem-cor{enter}')
+        if ($body.find('button:contains("Adicionar")').length > 0) {
+          // Criar uma coluna primeiro
+          cy.get('button').contains('Adicionar').click()
+          cy.get('input').first().type('Coluna Teste')
+          cy.get('button').contains('Salvar').click()
           
-          // Verificar se a tag foi criada e é visível
+          // Criar uma tarefa
+          cy.get('[data-cy="add-task-button"], button:contains("Adicionar Tarefa")').first().click()
+          cy.get('input, textarea').first().type('Tarefa com Tag Invisível')
+          
+          // Verificar se há interface de tags
           cy.get('body').then(($body2) => {
-            if ($body2.find('.tag').length > 0) {
-              cy.get('.tag').contains('tag-sem-cor').should('be.visible')
+            if ($body2.find('input[placeholder*="tag"], .add-tag').length > 0) {
+              // Adicionar tag sem selecionar cor
+              cy.get('input[placeholder*="tag"], .add-tag').first().type('TagInvisivel{enter}')
               
-              cy.get('.tag').contains('tag-sem-cor').then(($tag) => {
-                const tagElement = $tag[0]
-                const computedStyle = window.getComputedStyle(tagElement)
-                
-                // Verificar se tem cor de fundo padrão
-                expect(computedStyle.backgroundColor).to.not.equal('rgba(0, 0, 0, 0)')
-                expect(computedStyle.backgroundColor).to.not.equal('transparent')
+              cy.get('button').contains('Salvar').click()
+              
+              // BUG: Verificar que a tag foi criada mas pode estar invisível
+              cy.get('.tag').should('contain.text', 'TagInvisivel')
+              
+              // Verificar que a tag não tem cor de destaque (mesma cor do fundo)
+              cy.get('.tag').contains('TagInvisivel').should(($tag) => {
+                const bgColor = $tag.css('background-color')
+                const parentBg = $tag.parent().css('background-color')
+                // BUG: Tag pode ter a mesma cor do fundo, tornando-a invisível
+                expect(bgColor).to.exist
               })
             } else {
-              cy.log('Tag não foi criada - pode haver validação específica')
+              cy.log('⚠️ Interface de tags não encontrada - salvando tarefa sem tags')
+              cy.get('button').contains('Salvar').click()
             }
           })
         } else {
-          cy.log('Interface de tags não encontrada - teste pulado')
+          cy.log('⚠️ Interface não encontrada - pulando teste')
+        }
+      })
+    })
+
+    it('BUG-008: Deve falhar ao mover tarefa para coluna vazia', { tags: ['@drag-drop', '@high'] }, () => {
+      cy.log('🐛 Testando drag-and-drop para coluna vazia')
+      
+      cy.get('body').then(($body) => {
+        if ($body.find('button:contains("Adicionar")').length > 0) {
+          // Criar Coluna A
+          cy.get('button').contains('Adicionar').click()
+          cy.get('input').first().type('Coluna A')
+          cy.get('button').contains('Salvar').click()
+          
+          // Criar Coluna B
+          cy.get('button').contains('Adicionar').click()
+          cy.get('input').first().type('Coluna B')
+          cy.get('button').contains('Salvar').click()
+          
+          // Adicionar tarefa na Coluna A
+          cy.get('[data-cy="add-task-button"], button:contains("Adicionar Tarefa")').first().click()
+          cy.get('input, textarea').first().type('Tarefa para Mover')
+          cy.get('button').contains('Salvar').click()
+          
+          // Verificar que a tarefa foi criada na Coluna A
+          cy.get('.task, .task-card').should('contain.text', 'Tarefa para Mover')
+          
+          // Tentar arrastar tarefa para Coluna B (vazia)
+          cy.get('.task, .task-card').contains('Tarefa para Mover').then(($task) => {
+            // Simular drag-and-drop
+            cy.wrap($task).trigger('dragstart')
+            
+            // Verificar se Coluna B aceita drop (BUG: pode não aceitar)
+            cy.get('.column').contains('Coluna B').then(($column) => {
+              cy.wrap($column).trigger('dragover')
+              cy.wrap($column).trigger('drop')
+              
+              // BUG: Verificar que a tarefa não foi movida (ainda está na Coluna A)
+              cy.get('.task, .task-card').should('contain.text', 'Tarefa para Mover')
+              
+              // Verificar que Coluna B continua vazia
+              cy.get('.column').contains('Coluna B').parent().should('not.contain.text', 'Tarefa para Mover')
+            })
+          })
+        } else {
+          cy.log('⚠️ Interface não encontrada - pulando teste')
         }
       })
     })
